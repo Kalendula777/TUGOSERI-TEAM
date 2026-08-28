@@ -1,0 +1,36 @@
+{% extends 'team/base.html' %}
+
+{% block title %}Матчи — TUGOSERI TEAM{% endblock %}
+
+{% block content %}
+<section class="matches-page">
+    <div class="container">
+        <h1 class="section-title">Расписание <span class="accent">матчей</span></h1>
+        <p class="section-subtitle">Все игры команды: прошедшие и предстоящие</p>
+
+        {% if matches %}
+        <div class="matches-list">
+            {% for match in matches %}
+            <div class="match-row match-{{ match.result }}">
+                <div class="match-result-badge">
+                    {% if match.result == 'win' %}ПОБЕДА
+                    {% elif match.result == 'loss' %}ПОРАЖЕНИЕ
+                    {% else %}СКОРО{% endif %}
+                </div>
+                <div class="match-main">
+                    <span class="match-opponent">VS {{ match.opponent }}</span>
+                    {% if match.tournament %}<span class="match-tournament">{{ match.tournament }}</span>{% endif %}
+                </div>
+                <div class="match-side">
+                    {% if match.score %}<span class="match-score">{{ match.score }}</span>{% endif %}
+                    <span class="match-date">{{ match.date|date:"d.m.Y H:i" }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty-state">Матчи пока не добавлены. Добавьте их через админ-панель.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

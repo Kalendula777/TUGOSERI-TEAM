@@ -1,0 +1,85 @@
+{% extends 'team/base.html' %}
+{% load static %}
+
+{% block title %}TUGOSERI TEAM — Киберспортивная команда{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero-inner">
+        <p class="hero-tag">// PROFESSIONAL ESPORTS TEAM</p>
+        <h1 class="hero-title">TUGOSERI <span class="accent">TEAM</span></h1>
+        <p class="hero-subtitle">Мы не играем на победу. Мы играем, чтобы стать легендой.</p>
+        <div class="hero-buttons">
+            <a href="#roster" class="btn btn-primary">Состав команды</a>
+            <a href="{% url 'team:matches' %}" class="btn btn-outline">Расписание матчей</a>
+        </div>
+    </div>
+</section>
+
+{% if matches %}
+<section class="ticker">
+    <div class="container">
+        <h3 class="ticker-title"><span class="dot"></span> Ближайшие матчи</h3>
+        <div class="ticker-list">
+            {% for match in matches %}
+            <div class="ticker-item">
+                <span class="ticker-opponent">VS {{ match.opponent }}</span>
+                <span class="ticker-date">{{ match.date|date:"d.m.Y H:i" }}</span>
+                {% if match.tournament %}<span class="ticker-tournament">{{ match.tournament }}</span>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section class="roster" id="roster">
+    <div class="container">
+        <h2 class="section-title">Состав <span class="accent">команды</span></h2>
+        <p class="section-subtitle">Нажми на карточку игрока, чтобы узнать о нём больше</p>
+
+        {% if players %}
+        <div class="players-grid">
+            {% for player in players %}
+            <a href="{% url 'team:player_detail' player.pk %}" class="player-card">
+                <div class="player-card-glow"></div>
+                <div class="player-avatar-wrap">
+                    <img src="{{ player.avatar.url }}" alt="{{ player.nickname }}" class="player-avatar">
+                </div>
+                <div class="player-info">
+                    <h3 class="player-nick">{{ player.nickname }}</h3>
+                    <span class="player-role">{{ player.get_role_display }}</span>
+                </div>
+                <div class="player-card-corner"></div>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty-state">Состав пока не добавлен. Зайдите в админ-панель, чтобы добавить игроков.</p>
+        {% endif %}
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="container about-inner">
+        <div class="about-text">
+            <h2 class="section-title">О <span class="accent">команде</span></h2>
+            <p>TUGOSERI TEAM — киберспортивная организация, созданная игроками, которые не привыкли останавливаться на достигнутом. Мы выступаем на международных турнирах, растим таланты и строим комьюнити вокруг честной и зрелищной игры.</p>
+            <div class="about-stats">
+                <div class="stat">
+                    <span class="stat-number">12+</span>
+                    <span class="stat-label">Турниров</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">{{ players|length }}</span>
+                    <span class="stat-label">Игроков</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">2026</span>
+                    <span class="stat-label">Год основания</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

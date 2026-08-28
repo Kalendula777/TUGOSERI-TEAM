@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NEON WOLVES{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'team/css/style.css' %}">
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="{% url 'team:home' %}" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">TUGOSERI<span class="accent">TEAM</span></span>
+            </a>
+            <button class="burger" id="burger" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="main-nav" id="mainNav">
+                <a href="{% url 'team:home' %}#roster" class="nav-link">Состав</a>
+                <a href="{% url 'team:matches' %}" class="nav-link">Матчи</a>
+                <a href="{% url 'team:home' %}#about" class="nav-link">О команде</a>
+                <a href="{% url 'team:home' %}#contacts" class="nav-link">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer" id="contacts">
+        <div class="container footer-inner">
+            <div class="footer-logo">TUGOSERI<span class="accent">TEAM</span></div>
+            <p>© {% now "Y" %} TUGOSERI TEAM Esports. Все права защищены.</p>
+            <div class="footer-socials">
+                <a href="#">Twitch</a>
+                <a href="#">Twitter</a>
+                <a href="#">Discord</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'team/js/script.js' %}"></script>
+</body>
+</html>
