@@ -6,7 +6,7 @@ SECRET_KEY = 'django-insecure-CHANGE-THIS-KEY-BEFORE-DEPLOY-123456789'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['TUGOSERI_TEAMS.pythonanywhere.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
